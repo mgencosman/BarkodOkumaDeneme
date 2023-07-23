@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   qrResultString: string;
   goster: boolean = false;
 
-  barkod: string;
+  barcode: string;
   koordinat: GeolocationCoordinates = null;
 
   availableDevices: MediaDeviceInfo[] = [];
@@ -32,29 +32,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-    //   console.log("enumerateDevices() not supported.");
-    //   this.barkod = "enumerateDevices() not supported.";
-    // } else {
-    //   navigator.mediaDevices
-    //     .enumerateDevices()
-    //     .then((devices) => {
-    //       devices.forEach((device) => {
-    //         console.log(device);
-    //         if (device.kind == 'videoinput') {
-    //           console.log(`${device.kind}: ${device.label}`);
-    //           this.hasCameras = true;
-    //           this.availableDevices.push(device);
-    //           //this.barkod = 'eklendi';
-    //         }
-    //       });
-    //     })
-    //     .catch((err) => {
-    //       this.barkod = err.message;
-    //       console.log(`${err.name}: ${err.message}`);
-    //     });
-    // }
-
+    
     navigator.geolocation.getCurrentPosition((success) => {
       this.koordinat = success.coords;
       console.log(this.koordinat);
@@ -84,15 +62,15 @@ export class AppComponent implements OnInit {
       let soz = new Promise((resolve) => {
         resolve(e);
       }).then(p => {
-        this.okunanBarkod(p.toString());
+        this.readBarcode(p.toString());
       })
     }
   }
 
-  okunanBarkod(barkod: string) {
-    if (barkod != null) {
-      if (barkod.toString().length > 0) {
-        this.barkod = barkod;
+  readBarcode(barcode: string) {
+    if (barcode != null) {
+      if (barcode.toString().length > 0) {
+        this.barcode = barcode;
       }
     }
 
@@ -125,12 +103,13 @@ export class AppComponent implements OnInit {
     }
   }
 
-  baslat() {
+  start() {
     this.goster = true;
     this.playVideoFromCamera(true, false);
   }
 
-  yakala() {
+  //catch picture
+  catch() {
 
     let canvas: any = document.getElementById('resim');
     let video: any = document.getElementById('localVideo');
@@ -145,7 +124,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  durdur() {
+  stop() {
     this.goster = false;
 
     const tracks = this.stream.getTracks();
@@ -157,13 +136,13 @@ export class AppComponent implements OnInit {
     this.videoElement.srcObject = null;
   }
 
-  resmiKaydet() {
+  saveImage() {
     const indir: any = document.createElement('a');
-    let canvas: any = document.getElementById('resim');
-
+    let canvas: any = document.getElementById('resim'); 
+    //find image element and set url for download
     indir.href = canvas.toDataURL();
 
-    indir.download = "resimi-indir";
+    indir.download = "resimi-indir";// name of image
     indir.click();
     indir.romove();
   }

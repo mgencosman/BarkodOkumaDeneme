@@ -19,7 +19,7 @@
 
 <div >
 
-  <h1>{{barkod}}</h1>
+  <h1>{{barcode}}</h1>
   <h1>Enlem:{{koordinat.latitude}}</h1>
   <h1>Boylam:{{koordinat.longitude}}</h1>
 </div>
@@ -31,10 +31,10 @@
   <canvas  id="resim"></canvas>
 </div>
 <div >
-  <button class="btn solMarj"  (click)="baslat()">Başlat</button>
-  <button class="btn solMarj" (click)="durdur()">Durudur</button>
-  <button class="btn solMarj" (click)="yakala()">Resim yakala</button>
-  <button class="btn solMarj" (click)="resmiKaydet()">Kaydet</button>
+  <button class="btn solMarj"  (click)="start()">Başlat</button>
+  <button class="btn solMarj" (click)="stop()">Durudur</button>
+  <button class="btn solMarj" (click)="catch()">Resim yakala</button>
+  <button class="btn solMarj" (click)="saveImage()">Kaydet</button>
 </div>
 
 
