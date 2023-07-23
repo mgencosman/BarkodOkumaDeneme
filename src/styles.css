@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+.solMarj{
+    margin-left: 7px;
+}
+
+.btn{
+    border-radius: 5px;
+    background-color: white;
+    width: 8rem;
+    height: 2rem;
+}
+
+.btn:hover{
+    background-color:aquamarine;
+    font-weight: bold;
+}
